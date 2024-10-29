@@ -13,10 +13,12 @@ function memoize<T extends (...args: any[]) => any>(fn: T,options?: { maxSize?: 
       const result = fn(...args);
       cache.set(key, result);
  
-      if (cache.size > maxSize) {
-        const firstKey = cache.keys().next().value;
-        cache.delete(firstKey);
-      }
+     if(maxSize){
+        if (cache.size > maxSize) {
+            const firstKey = cache.keys().next().value;
+            cache.delete(firstKey);
+          }
+     } 
   
       return result;
     };
